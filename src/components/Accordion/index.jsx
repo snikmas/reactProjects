@@ -7,20 +7,37 @@ import './styles.css'
 export default function Accordian(){
 
   const [selected, setSelected] = React.useState(null);
-
-  function handleSigleSelection(getCurrentId){
+  const [multiSelectMode, setMultiSelectMode] = React.useState(false);
+  const [multiple, setMultiple] = React.useState([]);
+  
+  function handleSingleSelection(getCurrentId){
     setSelected(getCurrentId === selected ? null : getCurrentId);
-
+    console.log(selected)
   }
+
+  function handleMultiSelect(getCurrentId){
+    let copyMultiple = [...multiple];
+    const currentId = copyMultiple.indexOf(getCurrentId)
+    
+    console.log(currentId);
+    if(currentId == -1) copyMultiple.push(getCurrentId)
+      else copyMultiple.splice(currentId, 1);
+
+    console.log(copyMultiple);
+
+    setMultiple(copyMultiple);
+  }
+
 
   return (
     <div className="wrapper">
+      <button onClick={() => setMultiSelectMode(!multiSelectMode)}>Enable {multiSelectMode ? "Single Selection" : "Multi Seleciton"}</button>
       <div className="accordian">
           {
             data && data.length > 0 ? ( 
               data.map(dataItem => (
                 <div className='item'>
-                  <div onClick={() => handleSigleSelection(dataItem.id)} className='title'>
+                  <div onClick={() => multiSelectMode ? handleMultiSelect(dataItem.id) : handleSingleSelection(dataItem.id)} className='title'>
                     <h3>{dataItem.question}</h3>
                     <span>+</span>
                   </div>
