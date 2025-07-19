@@ -12,7 +12,6 @@ export default function Accordian(){
   
   function handleSingleSelection(getCurrentId){
     setSelected(getCurrentId === selected ? null : getCurrentId);
-    console.log(selected)
   }
 
   function handleMultiSelect(getCurrentId){
@@ -22,8 +21,6 @@ export default function Accordian(){
     console.log(currentId);
     if(currentId == -1) copyMultiple.push(getCurrentId)
       else copyMultiple.splice(currentId, 1);
-
-    console.log(copyMultiple);
 
     setMultiple(copyMultiple);
   }
@@ -42,11 +39,10 @@ export default function Accordian(){
                     <span>+</span>
                   </div>
                   {
-                    selected === dataItem.id ? 
-                      <div className='content'>
-                        {dataItem.answer}
-                      </div>
-                    : null
+                    multiSelectMode ? 
+                    multiple.indexOf(dataItem.id) !== -1 && 
+                    <div className='content'>{dataItem.answer}</div> : 
+                    selected === dataItem.id && <div className='content'>{dataItem.answer}</div>
                   }
                 </div>))
             ) : (<div>No data found !</ div>
