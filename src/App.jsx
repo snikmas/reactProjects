@@ -7,6 +7,8 @@ import "./components/Accordion/styles.css"
 import Accordian from './components/Accordion'
 import RandomColor from './components/RandomColor'
 import StarRating from './components/StarRating'
+import ImageSlider from './components/ImageSlider'
+
 
 function App() {
 
@@ -14,7 +16,8 @@ function App() {
     <div className='App'>
       {/* <Accordian /> */}
       {/* <RandomColor /> */}
-      <StarRating numOfStars={5}/>
+      {/* <StarRating numOfStars={5}/> */}
+      <ImageSlider url={`https://picsum.photos/v2/list`} pages={'1'} limit={10} />
     </div>
   )
 }
